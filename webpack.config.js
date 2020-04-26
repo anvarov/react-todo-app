@@ -22,10 +22,17 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.json$/,
+        exclude: /(node_modules|bower_components)/,
+        loaders: ["json"],
+      },
     ],
   },
   devServer: {
     contentBase: path.join(__dirname, "public"),
     port: 3000,
+    historyApiFallback: true,
+    // publicPath: "/dist/",
   },
 };

@@ -1,13 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
+import { Router } from "@reach/router";
 import "normalize.css";
+import DashboardPage from "./components/DashboardPage";
+import LoginPage from "./components/LoginPage";
 
-const Hello = () => {
+const App = () => {
   return (
-    <div>
-      <p>Hello World</p>
-    </div>
+    <Router>
+      <LoginPage path="/" />
+      <DashboardPage path="/dashboard" />
+    </Router>
   );
 };
-
-ReactDOM.render(<Hello />, document.getElementById("app"));
+render(<App />, document.getElementById("app"));
