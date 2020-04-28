@@ -19,7 +19,14 @@ const TodoList = () => {
   ]);
 
   const mapTodoList = (todo) => {
-    return <TodoListItem key={todo.id} id={todo.id} />;
+    return (
+      <TodoListItem
+        key={todo.id}
+        id={todo.id}
+        isActive={todo.isActive}
+        title={todo.title}
+      />
+    );
   };
 
   return (

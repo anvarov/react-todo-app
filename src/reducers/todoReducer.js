@@ -2,15 +2,14 @@ export default (state, action) => {
   switch (action.type) {
     case "ADD_TODO":
       return [...state, action.todoItem];
-    case "EDIT_TODO":
-      state.map((todoItem) => {
-        if (todoItem.id === action.todoItem.id) {
-          return action.updates;
+    case "CHANGE_STATUS":
+      return state.map((todoItem) => {
+        if (todoItem.id === action.id) {
+          return { ...todoItem, isActive: !todoItem.isActive };
         } else {
           return todoItem;
         }
       });
-      return [...state];
     case "REMOVE_TODO":
       return state.filter((todoItem) => {
         return todoItem.id !== action.id;
