@@ -37,7 +37,7 @@ const TodoList = () => {
         ) : (
           <p className="page--info">No Todos</p>
         )}
-        {/* <AddTodoItem /> */}
+        <AddTodoItem />
       </div>
     </todoContext.Provider>
   );
