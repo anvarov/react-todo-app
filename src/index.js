@@ -3,13 +3,14 @@ import { render } from "react-dom";
 import { Router } from "@reach/router";
 import "normalize.css";
 import DashboardPage from "./components/DashboardPage";
-import LoginPage from "./components/LoginPage";
+import LoginHandler from "./components/LoginHandler";
+import HashRouter from "./components/HashRouter";
 
 const App = () => {
   return (
     <Router>
-      <LoginPage path="/" />
-      <DashboardPage path="/dashboard" />
+      <LoginHandler path="/logged" />
+      <DashboardPage path="/" />
     </Router>
   );
 };

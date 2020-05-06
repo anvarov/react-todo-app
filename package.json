@@ -9,6 +9,7 @@
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
     "normalize.css": "^8.0.1",
+    "query-string": "^6.12.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "uuid": "^7.0.3",
