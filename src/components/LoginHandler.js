@@ -2,9 +2,8 @@ import React from "react";
 import AWS from "aws-sdk/global";
 import { Redirect, useLocation } from "@reach/router";
 import { parse } from "query-string";
-import S3 from "aws-sdk/clients/s3";
 import CognitoIdentity from "aws-sdk/clients/cognitoidentity";
-import CognitoIdentityServiceProvider from "aws-sdk/clients/cognitoidentityserviceprovider";
+import PARAMS from "../aws/awsCredentials";
 
 const LoginHandler = () => {
   const location = useLocation();
@@ -12,28 +11,20 @@ const LoginHandler = () => {
   const accessToken = parse(location.hash).access_token;
   console.log(idToken);
   const params = {
-    IdentityPoolId: "us-east-2:63926c50-4f8b-4bcf-9d4c-ab62996caad0",
+    IdentityPoolId: PARAMS.IdentityPoolId,
     Logins: {
-      "cognito-idp.us-east-2.amazonaws.com/us-east-2_ZgOgeCHBC": idToken,
+      [PARAMS.UserPoolProviderId]: idToken,
     },
-    region: "us-east-2",
+    region: PARAMS.region,
   };
-  AWS.config.region = "us-east-2";
+  AWS.config.region = PARAMS.region;
   AWS.config.credentials = new AWS.CognitoIdentityCredentials(params);
   AWS.config.credentials.get((err) => {
     console.log(err);
   });
   // console.log(AWS.config.credentials);
-  const s3 = new S3();
-  const s3params = {
-    Bucket: "examplebucket04272020",
-    MaxKeys: 10,
-  };
-  s3.listObjects(s3params, (err, data) => {
-    console.log(data);
-  });
   const cognitoidentity = new CognitoIdentity();
-
+  
   cognitoidentity.getId(
     {
       IdentityPoolId: "us-east-2:63926c50-4f8b-4bcf-9d4c-ab62996caad0",
