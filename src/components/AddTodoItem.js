@@ -1,12 +1,14 @@
-import React, { useContext, useState } from "react";
-import todoContext from "../context/todoContext";
+import React, { useState } from "react";
+import useDynamoDBHelper from "../hooks/useAddTodo";
+import { addItemtoDB } from "../aws/dynamoDBActions";
 import addTodo from "../actions/addTodo";
 
 const AddTodoItem = () => {
   const [state, onTodoTitleChange] = useState({ title: "test" });
-  const { dispatch } = useContext(todoContext);
+  const startAddTodo = useDynamoDBHelper(addItemtoDB, addTodo);
+
   return (
-    <form onSubmit={(e) => dispatch(addTodo(e))}>
+    <form onSubmit={(e) => startAddTodo(e)}>
       <input
         placeholder="this is todo input"
         value={state.title}

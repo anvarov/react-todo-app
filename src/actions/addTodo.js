@@ -1,8 +1,7 @@
-import { v4 as uuidv4 } from "uuid";
-export default (e) => {
-  e.preventDefault();
+export default ({ title, isActive, user_id, id }) => {
+  console.log(title, isActive, user_id, id);
   return {
     type: "ADD_TODO",
-    todoItem: { title: e.target.title.value, isActive: true, id: uuidv4() },
+    todoItem: { title, isActive, id, user_id },
   };
 };
