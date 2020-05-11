@@ -1,6 +1,9 @@
+import "core-js/features/promise";
+import "regenerator-runtime";
 import React, { useReducer } from "react";
 import { render } from "react-dom";
 import { Router } from "@reach/router";
+
 import DashboardPage from "./components/DashboardPage";
 import LoginHandler from "./components/LoginHandler";
 import TodoContext from "./context/todoContext";

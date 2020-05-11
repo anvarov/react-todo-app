@@ -19,7 +19,7 @@ const TodoListItem = ({ id, isActive, title }) => {
       <button
         type="submit"
         onClick={() => {
-          console.log(id, "from onclick");
+          // console.log(id, "from onclick");
           startTodoStatusChange(id);
         }}
       >

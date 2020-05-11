@@ -3,7 +3,6 @@ export default (state, action) => {
     case "ADD_TODO":
       return { ...state, todoList: [...state.todoList, action.todoItem] };
     case "CHANGE_STATUS":
-      console.log(action);
       return {
         ...state,
         todoList: state.todoList.map((todoItem) => {
