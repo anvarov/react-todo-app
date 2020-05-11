@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import useDynamoDBHelper from "../hooks/useAddTodo";
-import { addItemtoDB } from "../aws/dynamoDBActions";
+import useDynamoDBHelper from "../hooks/useDynamoDBHelper";
+import { addItemtoDB } from "../actions/addItemtoDB";
 import addTodo from "../actions/addTodo";
 
 const AddTodoItem = () => {
