@@ -3,10 +3,10 @@ import useDynamoDBHelper from "../hooks/useDynamoDBHelper";
 import { addItemtoDB } from "../actions/addTodoToDB";
 import addTodo from "../actions/addTodo";
 
-const AddTodoItem = () => {
+const AddTodoItem = ({ status }) => {
   const [state, onTodoTitleChange] = useState({ title: "test" });
   const startAddTodo = useDynamoDBHelper(addItemtoDB, addTodo);
-
+  console.log(status)
   return (
     <form onSubmit={(e) => startAddTodo(e)}>
       <input
@@ -15,7 +15,9 @@ const AddTodoItem = () => {
         onChange={(e) => onTodoTitleChange({ title: e.target.value })}
         name="title"
       />
-      <button type="submit">Submit</button>
+      <button disabled={status === "requested"} type="submit">
+        Submit
+      </button>
       <p>text from input {state.title}</p>
     </form>
   );

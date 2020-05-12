@@ -4,19 +4,22 @@ import removeTodo from "../actions/removeTodo";
 import todoStatusChange from "../actions/todoStatusChange";
 import useDynamoDBHelper from "../hooks/useDynamoDBHelper";
 import changeTodoStatusOnDB from "../actions/changeTodoStatusOnDB";
+import removeTodoFroomDB from "../actions/removeTodoFromDB";
 
 const TodoListItem = ({ id, isActive, title }) => {
-  console.log(id, "from todolist item");
+  // console.log(id, "from todolist item");
   const startTodoStatusChange = useDynamoDBHelper(
     changeTodoStatusOnDB,
     todoStatusChange
   );
-  const { dispatch, state } = useContext(TodoContext);
+  const startRemoveTodo = useDynamoDBHelper(removeTodoFroomDB, removeTodo);
+  const { state } = useContext(TodoContext);
   return (
     <div>
       <h3>{state.status + state.error}</h3>
       <h3>{title}</h3>
       <button
+        disabled={state.status === "requested"}
         type="submit"
         onClick={() => {
           // console.log(id, "from onclick");
@@ -26,7 +29,11 @@ const TodoListItem = ({ id, isActive, title }) => {
         {isActive ? "Mark complete" : "Make Active"}
       </button>
       <p>{isActive ? "Active" : "Completed"}</p>
-      <button type="submit" onClick={() => dispatch(removeTodo(id))}>
+      <button
+        disabled={state.status === "requested"}
+        type="submit"
+        onClick={() => startRemoveTodo(id)}
+      >
         remove
       </button>
     </div>

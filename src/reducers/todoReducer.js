@@ -1,5 +1,7 @@
 export default (state, action) => {
   switch (action.type) {
+    case "SET_TODOLIST":
+      return { ...state, todoList: action.todoList };
     case "ADD_TODO":
       return { ...state, todoList: [...state.todoList, action.todoItem] };
     case "CHANGE_STATUS":

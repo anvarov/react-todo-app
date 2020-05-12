@@ -6,26 +6,23 @@ import changeStatusToError from "../actions/changeStatusToError";
 
 const useDynamoDBhelper = (callback, action) => {
   const { dispatch } = useContext(TodoContext);
-  const handleSubmit = (param = undefined) => {
-    // console.log(param, "param");
-    // const event = param.persist();
-    // console.log(event, "event");
+  const handleAction = (param = undefined) => {
 
-    if (param.type === "submit") param.preventDefault();
+    if (param && param.type === "submit") param.preventDefault();
     // if (param instanceof Event) param.preventDefault();
     dispatch(changeStatusToRequested());
     // console.log(callback);
     callback(param)
-      .then((param) => {
+      .then((res) => {
         // console.log(param, "from useDB");
-        dispatch(action(param));
+        dispatch(action(res));
         dispatch(changeStatusToSuccess());
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err, "from dynamodb helper");
         dispatch(changeStatusToError(err));
       });
   };
-  return handleSubmit;
+  return handleAction;
 };
 export default useDynamoDBhelper;
